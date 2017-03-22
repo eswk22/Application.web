@@ -91,7 +91,7 @@ module.exports = function (env) {
       rules: [
 
         /*
-         * Extract CSS files from .src/styles directory to external CSS file
+         * Extract CSS files from .client/styles directory to external CSS file
          */
         {
           test: /\.css$/,
@@ -99,11 +99,11 @@ module.exports = function (env) {
             fallback: 'style-loader',
             use: 'css-loader'
           }),
-          include: [helpers.root('src', 'styles')]
+          include: [helpers.root('client', 'styles')]
         },
 
         /*
-         * Extract and compile SCSS files from .src/styles directory to external CSS file
+         * Extract and compile SCSS files from .client/styles directory to external CSS file
          */
         {
           test: /\.scss$/,
@@ -111,7 +111,7 @@ module.exports = function (env) {
             fallback: 'style-loader',
             use: 'css-loader!sass-loader'
           }),
-          include: [helpers.root('src', 'styles')]
+          include: [helpers.root('client', 'styles')]
         },
 
       ]
@@ -250,11 +250,11 @@ module.exports = function (env) {
       //   helpers.root('config/empty.js')
       // ),
       // new NormalModuleReplacementPlugin(
-      //   /src(\\|\/)debug(\\|\/)debug_node/,
+      //   /client(\\|\/)debug(\\|\/)debug_node/,
       //   helpers.root('config/empty.js')
       // ),
       // new NormalModuleReplacementPlugin(
-      //   /src(\\|\/)debug(\\|\/)debug_renderer/,
+      //   /client(\\|\/)debug(\\|\/)debug_renderer/,
       //   helpers.root('config/empty.js')
       // ),
 

@@ -58,9 +58,9 @@ module.exports = function (options) {
      */
     entry: {
 
-      'polyfills': './src/polyfills.browser.ts',
-      'main':      AOT ? './src/main.browser.aot.ts' :
-                  './src/main.browser.ts'
+      'polyfills': './client/polyfills.browser.ts',
+      'main':      AOT ? './client/main.browser.aot.ts' :
+                  './client/main.browser.ts'
 
     },
 
@@ -79,7 +79,7 @@ module.exports = function (options) {
       extensions: ['.ts', '.js', '.json'],
 
       // An array of directory names to be resolved to the current directory
-      modules: [helpers.root('src'), helpers.root('node_modules')],
+      modules: [helpers.root('client'), helpers.root('node_modules')],
 
     },
 
@@ -154,7 +154,7 @@ module.exports = function (options) {
         {
           test: /\.css$/,
           use: ['to-string-loader', 'css-loader'],
-          exclude: [helpers.root('src', 'styles')]
+          exclude: [helpers.root('client', 'styles')]
         },
 
         /*
@@ -165,7 +165,7 @@ module.exports = function (options) {
         {
           test: /\.scss$/,
           use: ['to-string-loader', 'css-loader', 'sass-loader'],
-          exclude: [helpers.root('src', 'styles')]
+          exclude: [helpers.root('client', 'styles')]
         },
 
         /* Raw loader support for *.html
@@ -176,7 +176,7 @@ module.exports = function (options) {
         {
           test: /\.html$/,
           use: 'raw-loader',
-          exclude: [helpers.root('src/index.html')]
+          exclude: [helpers.root('client/index.html')]
         },
 
         /* 
@@ -249,8 +249,8 @@ module.exports = function (options) {
        */
       new ContextReplacementPlugin(
         // The (\\|\/) piece accounts for path separators in *nix and Windows
-        /angular(\\|\/)core(\\|\/)src(\\|\/)linker/,
-        helpers.root('src'), // location of your src
+        /angular(\\|\/)core(\\|\/)client(\\|\/)linker/,
+        helpers.root('client'), // location of your client
         {
           // your Angular Async Route paths relative to this root directory
         }
@@ -265,8 +265,8 @@ module.exports = function (options) {
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
       new CopyWebpackPlugin([
-        { from: 'src/assets', to: 'assets' },
-        { from: 'src/meta'}
+        { from: 'client/assets', to: 'assets' },
+        { from: 'client/meta'}
       ]),
 
 
@@ -279,7 +279,7 @@ module.exports = function (options) {
        * See: https://github.com/ampedandwired/html-webpack-plugin
        */
       new HtmlWebpackPlugin({
-        template: 'src/index.html',
+        template: 'client/index.html',
         title: METADATA.title,
         chunksSortMode: 'dependency',
         metadata: METADATA,
@@ -333,23 +333,23 @@ module.exports = function (options) {
       // Fix Angular 2
       new NormalModuleReplacementPlugin(
         /facade(\\|\/)async/,
-        helpers.root('node_modules/@angular/core/src/facade/async.js')
+        helpers.root('node_modules/@angular/core/client/facade/async.js')
       ),
       new NormalModuleReplacementPlugin(
         /facade(\\|\/)collection/,
-        helpers.root('node_modules/@angular/core/src/facade/collection.js')
+        helpers.root('node_modules/@angular/core/client/facade/collection.js')
       ),
       new NormalModuleReplacementPlugin(
         /facade(\\|\/)errors/,
-        helpers.root('node_modules/@angular/core/src/facade/errors.js')
+        helpers.root('node_modules/@angular/core/client/facade/errors.js')
       ),
       new NormalModuleReplacementPlugin(
         /facade(\\|\/)lang/,
-        helpers.root('node_modules/@angular/core/src/facade/lang.js')
+        helpers.root('node_modules/@angular/core/client/facade/lang.js')
       ),
       new NormalModuleReplacementPlugin(
         /facade(\\|\/)math/,
-        helpers.root('node_modules/@angular/core/src/facade/math.js')
+        helpers.root('node_modules/@angular/core/client/facade/math.js')
       ),
 
       new ngcWebpack.NgcWebpackPlugin({
