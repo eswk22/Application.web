@@ -8,7 +8,7 @@ import { AboutComponent } from './about.component';
 describe('About', () => {
   // provide our implementations or mocks to the dependency injector
   beforeEach(() => TestBed.configureTestingModule({
-    providers: [
+    providers: [ 
       // provide a better mock
       {
         provide: ActivatedRoute,

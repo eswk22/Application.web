@@ -1,9 +1,3 @@
-// ```
-// env.conf.js
-// (c) 2016 David Newman
-// blackshuriken@hotmail.com
-// env.conf.js may be freely distributed under the MIT license
-// ```
 
 // *env.conf.js*
 
@@ -92,20 +86,20 @@ function validateMongoUri() {
 
       case 'development':
 
-        process.env.MONGO_URI = config.MONGO_URI.DEVELOPMENT;
-        console.log(`MONGO_URI set for ${process.env.NODE_ENV}`);
+        // process.env.MONGO_URI = config.MONGO_URI.DEVELOPMENT;
+        // console.log(`MONGO_URI set for ${process.env.NODE_ENV}`);
         break;
 
       case 'production':
 
-        process.env.MONGO_URI = config.MONGO_URI.PRODUCTION;
-        console.log(`MONGO_URI set for ${process.env.NODE_ENV}`);
+        // process.env.MONGO_URI = config.MONGO_URI.PRODUCTION;
+        // console.log(`MONGO_URI set for ${process.env.NODE_ENV}`);
         break;
 
       case 'test':
 
-        process.env.MONGO_URI = config.MONGO_URI.TEST;
-        console.log(`MONGO_URI set for ${process.env.NODE_ENV}`);
+        // process.env.MONGO_URI = config.MONGO_URI.TEST;
+        // console.log(`MONGO_URI set for ${process.env.NODE_ENV}`);
         break;
 
       default:
