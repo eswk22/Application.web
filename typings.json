@@ -2,7 +2,11 @@
   "dependencies": {
     "es6-promise": "github:typed-typings/npm-es6-promise#fb04188767acfec1defd054fc8024fafa5cd4de7"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "debug": "registry:npm/debug#2.0.0+20160723033700",
+    "express": "registry:npm/express#4.14.0+20170217205433",
+    "serve-static": "registry:npm/serve-static#1.11.1+20161113104247"
+  },
   "ambientDependencies": {
     "angular-protractor": "github:DefinitelyTyped/DefinitelyTyped/angular-protractor/angular-protractor.d.ts#64b25f63f0ec821040a5d3e049a976865062ed9d",
     "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#6697d6f7dadbf5773cb40ecda35a76027e0783b2",

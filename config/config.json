@@ -1,4 +1,10 @@
 {
-    "ENV" : "development",
-    "PORT" : 8081
+  "ENV" : "development",
+  "PORT" : 8081,
+  "MONGO_URI" : {
+    "DEVELOPMENT" : "mongodb://[username:password]@host[:port]",
+    "PRODUCTION" : "mongodb://[username:password]@host[:port]",
+    "TEST" : "mongodb://[username:password]@host[:port]"
+  },
+  "SESSION_SECRET" : "8C3DE7D1B84C1C62D3D1C54F75466"
 }

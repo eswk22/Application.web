@@ -8,13 +8,18 @@ import rename from 'gulp-rename';
 import nodemon from 'gulp-nodemon';
 import docco from 'gulp-docco';
 import scsslint from 'gulp-scss-lint';
+import  ts from 'gulp-typescript';
 import path from 'path';
 import del from 'del';
 //import globby from 'globby';
 
+// pull in the project TypeScript config
+const tsProject = ts.createProject('tsconfig.json');
+const JSON_FILES = ['server/*.json', 'server/**/*.json'];
+
 // Define `JavaScript` files to watch/ignore
 let jsGlob = ['server/**/*.js', '!{node_modules,node_modules/**}', '!{docs,doc/**}',
-  '!{dist,dist/**}', '!{coverage,coverage/**}', '!src/{res,res/**}',
+  '!{dist,dist/**}', '!{coverage,coverage/**}', '!server/{res,res/**}','!server/**/*.spec.ts',
   '!config/env.conf.js'];
 
 // Define `TypeScript` files to watch/ignore
@@ -65,6 +70,20 @@ gulp.task('build:docs', () => {
 
   generateDocs(scssGlob, '.scss');
 
+});
+
+//convert typescript to javascript
+gulp.task('watch:scripts', () => {
+   gulp.watch(tsGlob, function (event) {
+      const tsResult = tsProject.src()
+      .pipe(tsProject());
+      return tsResult.js.pipe(gulp.dest('dist'));
+   });
+});
+
+gulp.task('assets', function() {
+  return gulp.src(JSON_FILES)
+  .pipe(gulp.dest('dist'));
 });
 
 // Create documentation for Javascript, Typescript, and Sass files
@@ -159,7 +178,7 @@ gulp.task('watch:docs', () => {
 });
 
 // Sugar for `gulp serve:watch`
-gulp.task('serve', ['serve:watch']);
+gulp.task('serve', ['watch:scripts','serve:watch']);
 
 // Configure gulp-nodemon
 // This watches the files belonging to the app for changes
@@ -167,7 +186,7 @@ gulp.task('serve', ['serve:watch']);
 gulp.task('serve:watch', () => {
 
   nodemon({
-    script : 'server.js',
+    script : 'dist/index.js',
     ext : 'js'
   });
 });

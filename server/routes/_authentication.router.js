@@ -35,7 +35,7 @@ export default (app, router, passport, auth, admin) => {
   router.get('/auth/loggedIn', (req, res) => {
 
     // If the user is authenticated, return a user object
-    // else return 0
+    // else return 0 
     res.send(req.isAuthenticated() ? req.user : '0');
   });
 

@@ -7,6 +7,10 @@ export type InternalStateType = {
 @Injectable()
 export class AppState {
 
+    public get ServiceUrl() {
+        return 'http://localhost:24397/';
+    }
+    
   public _state: InternalStateType = { };
 
   // already return a clone of the current state

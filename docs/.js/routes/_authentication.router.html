@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>_authentication.router.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="..\docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>_authentication.router.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <pre><code>_authentication.router.js
+(c) <span class="hljs-number">2016</span> David Newman
+blackshuriken@hotmail.com
+_authentication.router.js may be freely distributed under the MIT license
+</code></pre>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p><em>/app/routes/_authentication.router.js</em></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>GET    <em>/api/auth/user</em>        Get user data from session object in
+                               Node</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>GET    <em>/api/auth/loggedin</em>    Route to test if the user is logged in
+                               or not</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>POST   <em>/api/auth/login</em>       Route to login</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>POST   <em>/api/auth/logout</em>      Route to logout and redirect to the
+                               appropriate view</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <h2 id="authentication-api-object">Authentication API object</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Load user model
+import User from ‘../models/user.model.js’;</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Load the Mongoose ObjectId function to cast string as
+ObjectId</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">let</span> ObjectId = <span class="hljs-literal">null</span>;<span class="hljs-comment">// require('mongoose').Types.ObjectId;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (app, router, passport, auth, admin) =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <h3 id="authentication-api-routes">Authentication API Routes</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Route to test if the user is logged in or not</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  router.get(<span class="hljs-string">'/auth/loggedIn'</span>, (req, res) =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>If the user is authenticated, return a user object
+else return 0 </p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    res.send(req.isAuthenticated() ? req.user : <span class="hljs-string">'0'</span>);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>Route to log a user in</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  router.post(<span class="hljs-string">'/auth/login'</span>, (req, res, next) =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>Call <code>authenticate()</code> from within the route handler, rather than
+as a route middleware. This gives the callback access to the <code>req</code>
+and <code>res</code> object through closure.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>If authentication fails, <code>user</code> will be set to <code>false</code>. If an
+exception occured, <code>err</code> will be set. <code>info</code> contains a message
+set within the Local Passport strategy.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    passport.authenticate(<span class="hljs-string">'local-login'</span>, (err, user, info) =&gt; {
+
+      <span class="hljs-keyword">if</span> (err)
+        <span class="hljs-keyword">return</span> next(err);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>If no user is returned…</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (!user) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Set HTTP status code <code>401 Unauthorized</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        res.status(<span class="hljs-number">401</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Return the info message</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">return</span> next(info.loginMessage);
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Use login function exposed by Passport to establish a login
+session</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      req.login(user, (err) =&gt; {
+
+        <span class="hljs-keyword">if</span> (err)
+          <span class="hljs-keyword">return</span> next(err);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Set HTTP status code <code>200 OK</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        res.status(<span class="hljs-number">200</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Return the user object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        res.send(req.user);
+      });
+
+    }) (req, res, next);
+  });
+
+  router.post(<span class="hljs-string">'/auth/signup'</span>, (req, res, next) =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>Call <code>authenticate()</code> from within the route handler, rather than
+as a route middleware. This gives the callback access to the <code>req</code>
+and <code>res</code> object through closure.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>If authentication fails, <code>user</code> will be set to <code>false</code>. If an
+exception occured, <code>err</code> will be set. <code>info</code> contains a message
+set within the Local Passport strategy.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    passport.authenticate(<span class="hljs-string">'local-signup'</span>, (err, user, info) =&gt; {
+
+      <span class="hljs-keyword">if</span> (err)
+        <span class="hljs-keyword">return</span> next(err);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>If no user is returned…</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (!user) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>Set HTTP status code <code>401 Unauthorized</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        res.status(<span class="hljs-number">401</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>Return the info message</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">return</span> next(info.signupMessage);
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>Set HTTP status code <code>204 No Content</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      res.sendStatus(<span class="hljs-number">204</span>);
+
+    }) (req, res, next);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>Route to log a user out</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  router.post(<span class="hljs-string">'/auth/logout'</span>, (req, res) =&gt; {
+
+    req.logOut();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <p>Even though the logout was successful, send the status code
+<code>401</code> to be intercepted and reroute the user to the appropriate
+page</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    res.sendStatus(<span class="hljs-number">401</span>);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>Route to get the current user
+The <code>auth</code> middleware was passed in to this function from <code>routes.js</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  router.get(<span class="hljs-string">'/auth/user'</span>, auth, (req, res) =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>Send response in JSON to allow disassembly of object by functions</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    res.json(req.user);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>Route to delete a user. Accepts a url parameter in the form of a
+username, user email, or mongoose object id.
+The <code>admin</code> Express middleware was passed in from <code>routes.js</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  router.delete(<span class="hljs-string">'/auth/delete/:uid'</span>, admin, (req, res) =&gt; {
+
+    User.remove({</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>Model.find <code>$or</code> Mongoose condition</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      $or : [
+
+        { <span class="hljs-string">'local.username'</span> : req.params.uid },
+
+        { <span class="hljs-string">'local.email'</span> : req.params.uid },
+
+        { <span class="hljs-string">'_id'</span> : ObjectId(req.params.uid) }
+      ]
+    }, (err) =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>If there are any errors, return them</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (err)
+        <span class="hljs-keyword">return</span> next(err);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>HTTP Status code <code>204 No Content</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      res.sendStatus(<span class="hljs-number">204</span>);
+    });
+  
+
+});
+};</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
