@@ -32,6 +32,10 @@ import { XLargeDirective } from './home/x-large';
 import '../styles/styles.scss';
 import '../styles/headings.css';
 
+
+//Material Design
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
