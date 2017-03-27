@@ -54,7 +54,7 @@
     "server": "npm run server:dev",
     "start:hmr": "npm run server:dev:hmr",
     "start": "npm run server:dev",
-    "test-server": "mocha --reporter spec --compilers ts:ts-node/register 'server/account/_user.router.spec.ts'",
+    "test-server": "mocha --reporter spec --compilers ts:ts-node/register \"server/account/_user.router.spec.ts\"",
     "start-backend": "npm run server-backend:dev",
     "test": "npm run lint && karma start",
     "tslint": "tslint",

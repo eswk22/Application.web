@@ -23,4 +23,11 @@ describe('baseRoute', () => {
     });
   });
 
+  it('should have more than one record',() => {
+    return chai.request(app).get('/api/users')
+    .then(res => {
+        expect(res.body.message).to.eql('Eswar');
+    });
+  });
+
 });

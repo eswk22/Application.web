@@ -16,17 +16,19 @@ export class UserRoutes {
  * Take each handler, and attach to one of the Express.Router's
  * endpoints.
  */
-  init(){
+  init(){ 
     this.router.get('/', this.getAll);
     this.router.get('/:id', this.getOne);
   }
 
 
   /**
-   * GET all Heroes.
+   * GET all Users.
    */
   public getAll(req: Request, res: Response, next: NextFunction) {
-    res.send("Eswar");
+     res.json({
+        message: 'Eswar'
+      });
   }
 
 
